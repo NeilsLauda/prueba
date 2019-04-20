@@ -1,0 +1,30 @@
+#conversationContainer {
+  background-image: url(/assets/img/msnbg.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#conversationAvatar {
+  width: 30px;
+  height: 30px;
+}
+
+#whiteBorderGlassBox {
+  border: 2px solid rgba(255, 255, 255, .75);
+  padding: 8px;
+}
+
+.marto30 {
+  margin-top: 50px;
+}
+
+.ri30 {
+  left: 100px;
+}
+#homeAvatarPicture {
+  max-width: 100px;
+}
+
+.conversationHeadContainer {
+  background-color: rgba(255, 255, 255, .50);
+}
