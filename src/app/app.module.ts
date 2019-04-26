@@ -16,13 +16,15 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AuthenticationGuard } from './services/authentication.guard';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'conversation/:uid', component: ConversationComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] }
 
 ];
 
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ImageCropperModule
 
   ],
   providers: [],

@@ -9,14 +9,16 @@
           </div>
         </div>
 
-        <div class="col">
-          <b>Eduardo</b>
+        <div class="col" *ngIf="user">
+          <b>{{user.nick}}</b>
           <div>
-            <span>Online</span>
+            <span>{{user.status}}</span>
             <br />
             <span>
               < Escribe un mensaje >
             </span>
+            <br />
+            <a (click)="logout()">Cerrar sesi&oacute;n</a>
           </div>
         </div>
 
@@ -38,7 +40,7 @@
 
 
     <hr />
-    <b>Amigos ({{friends.length}}/ {{friends.length}})</b>
+    <b *ngIf="friends">Amigos ({{friends.length}}/ {{friends.length}})</b>
 
     <div *ngFor="let  user of  friends | search: query; let i = index "
     class="disblo marbo5">

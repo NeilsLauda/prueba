@@ -1,6 +1,8 @@
+import { AuthenticationService } from './../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../Interfaces/user';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,21 +11,32 @@ import { UserService } from '../services/user.service';
 })
 export class HomeComponent implements OnInit {
   friends: User[];
-  query: string = '';
-  friendId: any;
-  friend: User;
-  constructor(private userService: UserService) {
+  user: User;
 
-    this.friends = this.userService.getFriends();
-    this.friend = this.friends.find((record) => {
-      return record.uid == this.friendId;
+  constructor(private userService: UserService, private authenticationService: AuthenticationService, private router: Router) {
+
+    this.userService.getUsers().valueChanges().subscribe((data: User[]) => {
+      this.friends = data;
+    }, (error) => {
+      console.log(error);
     });
 
-
+    this.authenticationService.getStatus().subscribe((status) => {
+      this.userService.getUserById(status.uid).valueChanges().subscribe((data: User) => {
+        this.user = data;
+        console.log(this.user);
+      });
+    });
 
   }
-
+  logout() {
+    this.authenticationService.logOut().then(data => {
+      alert('Sesion cerrada');
+      this.router.navigate(['login']);
+    }, (error) => {
+      console.log(error);
+    });
+  }
   ngOnInit() {
   }
-
 }
