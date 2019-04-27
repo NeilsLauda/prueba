@@ -20,7 +20,7 @@ import { AuthenticationGuard } from './services/authentication.guard';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'conversation/:uid', component: ConversationComponent },
