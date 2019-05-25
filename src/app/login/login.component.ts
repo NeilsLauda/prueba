@@ -13,8 +13,8 @@ export class LoginComponent implements OnInit {
   operation = 'login';
   email: string = null;
   password: string = null;
-  emailf: string = null;
-  passwordf: string = null;
+  emailfb: string = null;
+  passwordfb: string = null;
   nick: string = null;
   constructor(private authenticationService: AuthenticationService, private userService: UserService, private router: Router) { }
 
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithFacebook() {
-    this.authenticationService.loginWithFacebook(this.emailf, this.passwordf).then(data => {
+    this.authenticationService.loginWithFacebook(this.emailfb, this.passwordfb).then(data => {
       alert('Logeado con Facebook correctamente');
       console.log(data);
     }).catch(error => {

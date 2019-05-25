@@ -2,7 +2,7 @@
   <div class="whiteBorderGlassBox">
     <div class="homeHeadContainer">
 
-      <div class="row" >
+      <div class="row">
         <div class="col-md-auto">
           <div class="avatarFrameOnline">
             <img src="assets/img/generic_avatar.png" id="homeAvatarPicture" />
@@ -15,7 +15,7 @@
             <span>{{user.status}}</span>
             <br />
             <span>
-              < Escribe un mensaje >
+              < Escribe un mensaje>
             </span>
             <br />
             <a (click)="logout()">Cerrar sesi&oacute;n</a>
@@ -34,23 +34,40 @@
         <input type="text" class="form-control" placeholder="Busca tu amigo" [(ngModel)]="query" />
       </div>
       <div class="col-md-auto">
-        <img src="/assets/img/logo_live_add.png" alt="" class="icon">
+        <img (click)="open(content)" src="/assets/img/logo_live_add.png" alt="" class="icon">
       </div>
     </div>
 
 
     <hr />
-    <b *ngIf="friends">Amigos ({{friends.length}}/ {{friends.length}})</b>
-
-    <div *ngFor="let  user of  friends | search: query; let i = index "
-    class="disblo marbo5">
-      <span routerLink='/conversation/{{user.uid}}'>
-        <img src="/assets/img/logo_live_online.png" class="icon">
-        <b>{{user.nick}}</b> - {{user.subnick || 'No sub-nick'}}
-        <small>{{user.email}}</small>
-      </span>
+    <b *ngIf="user && user.friends">Amigos ({{user.friends.length}}/ {{user.friends.length}})</b>
+    <div *ngIf="user && user.friends">
+      <div class="disblo marbo5">
+        <!-- [uid] recibe la informacion de user, que al mismo tiempo envia el uid que viene de user.friends-->
+        <app-contact class="col-md-12" *ngFor="let  user of  user.friends" [uid]="user"></app-contact>
+      </div>
     </div>
-
-
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Agregar amigos!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <b>Ingrese el email de tu amigo</b>
+      <input type="email" class="form-control" placeholder="Email" [(ngModel)]="friendEmail"
+        (keyup.enter)="sendRequest()">
+        <br/>
+        <input type="text" class="form-control" placeholder="Envia un mensaje" [(ngModel)]="message">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="sendRequest()">Guardar</button>
+  </div>
+</ng-template>
+<pre>{{closeResult}}</pre>

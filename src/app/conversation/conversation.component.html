@@ -1,4 +1,4 @@
-<div id="conversationContainer">
+<div id="conversationContainer" [ngClass]="{'shaker': shake}">
   <div class="whiteBorderGlassBox">
     <div class="conversationHeadContainer">
 
@@ -25,16 +25,10 @@
               <div class="card">
                 <div class="card-body">
                   <div class="col">
-                    <i>
-                        <span class="badge badge-dark">Hola como estas?</span>
-                    </i>
-
+                  <div class="messageGroup" *ngFor="let m of conversation">
+                    <b>{{getuserNickById(m.sender)}}</b> dice: <br/>
+                    <span>{{m.text}}</span>
                   </div>
-                  <div class="col text-right">
-
-                    <i>
-                      <span class="badge badge-dark">Yo bien y tu?</span>
-                    </i>
                   </div>
                 </div>
               </div>
@@ -63,13 +57,13 @@
 
             <form>
               <div class="form-group">
-                <textarea class="form-control" id="Area-de-Chat" rows="3"
+                <textarea [(ngModel)]="textMessage" name="something" (keyup.enter)="sendMessage()" class="form-control"  rows="3"
                   placeholder="Escribe menos de 140 caracteres"></textarea>
                 <div class="col text-right">
                   <i class="img mr-1">
                     <img src="assets/img/icons/regular_smile.gif" alt="">
                   </i>
-                  <i class="img mr-1">
+                  <i class="img mr-1" (click)="sendZumbido()">
                     <img src="assets/img/icons/tongue_smile.gif" alt="">
                   </i>
                   <i class="img mr-1">

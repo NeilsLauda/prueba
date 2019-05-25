@@ -19,11 +19,11 @@
             (click)="operation ='register'">Registrar</a></p>
         <div class="borderedContainer">
           <input [(ngModel)]="email" class="form-control marbo15" type="email" placeholder="Ingrese email" />
-          <input [(ngModel)]="password" class="form-control marbo15" type="password" placeholder="Ingrese contraseña" />
+          <input [(ngModel)]="password" (keyup.enter)="login()" class="form-control marbo15" type="password" placeholder="Ingrese contraseña" />
           <input [(ngModel)]="nick" *ngIf="operation == 'register'" class="form-control marbo15" type="text" placeholder="Ingrese Nick" />
         </div>
         <div class="center marto15 marbo15">
-          <a  (click)="login()" *ngIf="operation == 'login'" class="button ">Iniciar Sesion</a>
+          <a  (click)="login()"  *ngIf="operation == 'login'" class="button ">Iniciar Sesion</a>
           <a  (click)="loginWithFacebook()" *ngIf="operation == 'login'" class="btn btn-primary facebook ">Iniciar con Facebook</a>
           <a (click)="register()" *ngIf="operation == 'register'" class="button ">Registrarme</a>
         </div>
